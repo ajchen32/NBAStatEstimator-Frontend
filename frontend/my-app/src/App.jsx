@@ -21,7 +21,8 @@ function App() {
 
   useEffect(() => {
     // Load prediction CSV data
-    fetch('/frontend_predictions.csv')
+    const baseUrl = import.meta.env.BASE_URL || '/'
+    fetch(`${baseUrl}frontend_predictions.csv`)
       .then(response => response.text())
       .then(text => {
         const lines = text.split('\n').filter(line => line.trim())
@@ -53,7 +54,7 @@ function App() {
         setData(rows)
         
         // Load game data CSV
-        return fetch('/nba_2025_all_players_full_season_all_games.csv')
+        return fetch(`${baseUrl}nba_2025_all_players_full_season_all_games.csv`)
       })
       .then(response => {
         if (!response) {
@@ -158,7 +159,7 @@ function App() {
         setGameData(gameRows)
         
         // Load averages CSV
-        return fetch('/player_averages_for_frontend.csv')
+        return fetch(`${baseUrl}player_averages_for_frontend.csv`)
       })
       .then(response => {
         if (!response) {
@@ -202,7 +203,7 @@ function App() {
         setAveragesData(avgRows)
         
         // Load model improvement stats CSV
-        return fetch('/model_improvement_analysis.csv')
+        return fetch(`${baseUrl}model_improvement_analysis.csv`)
       })
       .then(response => {
         if (!response || response.status === 404) {
